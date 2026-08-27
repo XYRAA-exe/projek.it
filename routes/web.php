@@ -1,4 +1,3 @@
-```php
 <?php
 
 use App\Http\Controllers\ProfileController;
@@ -13,6 +12,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin-test', function () {
     return 'Halo Admin! Akses berhasil.';
 })->middleware(['auth', 'role:Admin']);
+
+Route::middleware(['auth', 'role:Admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
