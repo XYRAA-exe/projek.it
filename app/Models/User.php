@@ -50,6 +50,14 @@ class User extends Authenticatable
     }
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class);    
     }
-}
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'user_id');
+    }
+    public function assignedTickets()
+    {
+        return $this->hasMany(Ticket::class, 'assigned_to');
+    }
+}   
